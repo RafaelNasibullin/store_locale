@@ -1,0 +1,48 @@
+<nav class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to (t '.sitename'), root_path, class: 'navbar-brand' %>
+
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      <%= link_to_unless_current "EN", locale: 'en' %>
+      <%= link_to_unless_current "RU", locale: 'ru' %>
+      </ul>
+      <ul class="navbar-nav navbar-right">
+        <% if user_signed_in? %>
+        <div class="navbar-left">
+          <%= image_tag current_user.image_url(:thumb), height: 45, width: 45 if current_user.image != nil %>
+        </div>
+        <p class="navbar-text">
+         <%= t '.login_as' %><%= current_user.name %>
+       </p>
+       <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= (t '.account') %><span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <% if current_user.admin? %>
+            <li><%= link_to (t '.admin_panel'), admin_root_path %></li>
+            <% end %>
+            <li><%= link_to (t '.edit_profile'), edit_user_registration_path(current_user) %></li>
+            <li><%= link_to (t '.update_avatar'), products_update_avatar_path if user_signed_in? %></li>
+            <li class="divider"></li>
+            <li><%= link_to (t '.exit'), destroy_user_session_path, method: :delete %></li>
+          </ul>
+        </li>
+      </ul>
+      <% else %>
+      <%= link_to (t '.sign_up'), new_user_registration_path, class: 'btn btn-default navbar-btn' %>
+      <%= link_to (t '.log_in'), new_user_session_path, class: 'btn btn-default navbar-btn' %>
+      <% end %>
+    </ul>
+  </div>
+</div>
+</nav>

@@ -1,0 +1,8 @@
+ru:
+  activerecord:
+    models:
+      product: "Продукт"
+    attributes:
+      product:
+        title_en: "Имя на английском"
+        title_ru: "Имя на русском"

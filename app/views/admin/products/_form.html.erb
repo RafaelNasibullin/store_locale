@@ -1,0 +1,62 @@
+<%= form_for [:admin, @product], html: {class: 'form-horizontal'} do |f| %>
+
+    <div class="form-group <%= 'has-error' if @product.errors[:title_en].any? %>">
+      <%= f.label (t 'title_en'), class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <%= f.text_field :title_en, class: 'form-control' %>
+        <%= render 'shared/field_errors', object: @product, field_name: :title_en %>
+      </div>
+    </div>
+    <div class="form-group <%= 'has-error' if @product.errors[:title_ru].any? %>">
+      <%= f.label (t 'title_ru'), class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <%= f.text_field :title_ru, class: 'form-control' %>
+        <%= render 'shared/field_errors', object: @product, field_name: :title_ru %>
+      </div>
+    </div>
+
+    <div class="form-group <%= 'has-error' if @product.errors[:description_en].any? %>">
+      <%= f.label (t 'description_en'), class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <%= f.text_area :description_en, class: 'form-control' %>
+        <%= render 'shared/field_errors', object: @product, field_name: :description_en %>
+      </div>
+    </div>
+    <div class="form-group <%= 'has-error' if @product.errors[:description_ru].any? %>">
+      <%= f.label (t 'description_ru'), class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <%= f.text_area :description_ru, class: 'form-control' %>
+        <%= render 'shared/field_errors', object: @product, field_name: :description_ru %>
+      </div>
+    </div>
+
+    <div class="form-group <%= 'has-error' if @product.errors[:price].any? %>">
+      <%= f.label (t 'price'), class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <%= f.text_field :price, class: 'form-control' %>
+        <%= render 'shared/field_errors', object: @product, field_name: :price %>
+      </div>
+    </div>
+
+    <div class="form-group <%= 'has-error' if @product.errors[:category_id].any? %>">
+      <%= f.label (t 'category'), class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <%= f.collection_select :category_id, Category.all, :id, ("name_" + "#{I18n.locale}").to_sym, {}, class: 'form-control' %>
+        <%= render 'shared/field_errors', object: @product, field_name: :category_id %>
+      </div>
+    </div>
+
+    <div class="form-group <%= 'has-error' if @product.errors[:image].any? %>">
+      <%= f.label (t 'image'), class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <%= f.file_field :image %>
+        <%= render 'shared/field_errors', object: @product, field_name: :image %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <%= f.submit (t 'create_product'), class: 'btn btn-primary' %>
+      </div>
+    </div>
+<% end %>

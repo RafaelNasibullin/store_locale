@@ -1,0 +1,8 @@
+<div class="col-sm-6 product-item">
+  <div class="panel panel-default">
+    <div class="panel-body">
+    <h3><%= t '.name' %><%=  @category.send("name_" + "#{I18n.locale}") %></h3>
+    </div>
+  </div>
+  <%= link_to (t '.back'), root_path %>
+</div>

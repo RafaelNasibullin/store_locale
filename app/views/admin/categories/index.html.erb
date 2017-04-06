@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h1><%= t 'categories' %> <%= link_to (t 'add_category'), new_admin_category_path, class: 'btn btn-success' %></h1>
+  </div>
+</div>
+
+<hr />
+
+<table class="table table-striped">
+  <tr>
+    <th><%= t 'name' %></th>
+    <th style="width: 100px;"><%= t 'actions' %></th>
+  </tr>
+
+  <% @categories.each do |category| %>
+      <tr>
+        <td><%= category.send("name_" + "#{I18n.locale}") %></td>
+        <td>
+          <%= link_to (t 'delete'), admin_category_path(category), method: :delete, data: {confirm: (t 'delete_confirm_category')} %>
+        </td>
+      </tr>
+  <% end %>
+</table>

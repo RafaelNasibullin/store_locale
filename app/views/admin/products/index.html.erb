@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h1><%= (t 'products') %><%= link_to (t 'new_product'), new_admin_product_path, class: 'btn btn-success' %></h1>
+  </div>
+</div>
+
+<hr />
+
+<table class="table table-striped">
+  <tr>
+    <th><%= (t 'image') %></th>
+    <th><%= (t 'title') %></th>
+    <th><%= (t 'description') %></th>
+    <th><%= (t 'price') %></th>
+    <th><%= (t 'category') %></th>
+    <th><%= (t 'actions') %></th>
+  </tr>
+
+  <% @products.each do |product| %>
+      <tr>
+        <td><%= image_tag product.image_url(:thumb) %></td>
+        <td><%= product.send("title_" + "#{I18n.locale}") %></td>
+        <td><%= product.send("description_" + "#{I18n.locale}") %></td>
+        <td><%= product.price %></td>
+        <td><%= product.category.send("name_" + "#{I18n.locale}") if product.category != nil %></td>
+        <!-- send -->
+        <td>
+          <%= link_to (t 'view'), admin_product_path(product) %>
+          <%= link_to (t 'edit'), edit_admin_product_path(product) %>
+          <%= link_to (t 'delete'), admin_product_path(product),
+                      method: :delete,
+                      data: {confirm: (t 'delete_confirm')} %>
+        </td>
+      </tr>
+  <% end %>
+
+</table>
